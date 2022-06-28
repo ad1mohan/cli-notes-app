@@ -1,1 +1,2 @@
-This is my first log
+My name is Aditya Mohan
+I am learning node.js
