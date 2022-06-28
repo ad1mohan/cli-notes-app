@@ -1,2 +1,0 @@
-My name is Aditya Mohan
-I am learning node.js

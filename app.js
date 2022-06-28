@@ -1,4 +1,6 @@
-const fs = require("fs");
+const utils = require("./utils");
 
-fs.writeFileSync("log.txt", "My name is Aditya Mohan"); // Rewrites the existing file, creates one if not exists
-fs.appendFileSync("log.txt", "\nI am learning node.js"); // appends the existing file, creates one if not exists
+const getNotes = require("./notes");
+
+console.log(getNotes());
+utils();
