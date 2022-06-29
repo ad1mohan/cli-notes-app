@@ -43,9 +43,17 @@ yargs.command({
 
 yargs.command({
 	command: "remove",
-	describe: "This will remove",
-	helper: function () {
-		console.log("this will remove file");
+	describe: "This will remove the Note",
+	builder: {
+		title: {
+			describe: "Remove title",
+			demandOption: true,
+			type: "string",
+		},
+	},
+	handler: function (argv) {
+		//console.log("This will remove Note");
+		notes.removeNotes(argv.title);
 	},
 });
 
