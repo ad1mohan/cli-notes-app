@@ -1,28 +1,12 @@
+const fs = require("fs");
 const chalk = require("chalk");
-//const { argv } = require("yargs");
+const Notes = require("./notes");
 const yargs = require("yargs");
-const notes = require("./notes.js");
-/*const name = require("./log.js");
-
-require("./log.js");
-console.log("This is app js");
-console.log(name.lname);
-*/
-
-/*const valid = require("validator");
-
-console.log(valid.isEmail("adgdfs@afdf.com"));
-*/
-
-//const Chal = require("chalk");
-//console.log(chalk.green.bold("Success!"));
-//console.log(process.argv[2]);
-
-//console.log(yargs.argv);
+const { argv } = require("process");
 
 yargs.command({
 	command: "add",
-	describe: "Add a new note",
+	describe: "Add note",
 	builder: {
 		title: {
 			describe: "Note title",
@@ -30,47 +14,57 @@ yargs.command({
 			type: "string",
 		},
 		body: {
-			describe: "Note Body part",
-			demandOption: "true",
+			describe: "Note body",
+			demandOption: true,
 			type: "string",
 		},
 	},
-	handler: function (argv) {
-		const abc = notes.addNotes(argv.title, argv.body);
-		//console.log(notes);
+	handler(argv) {
+		Notes.addNotes(argv.title, argv.body);
+		console.log("Add notes");
 	},
 });
 
 yargs.command({
 	command: "remove",
-	describe: "This will remove the Note",
+	describe: "Remove note",
 	builder: {
 		title: {
-			describe: "Remove title",
+			describe: "Note title to remove",
 			demandOption: true,
 			type: "string",
 		},
 	},
-	handler: function (argv) {
-		//console.log("This will remove Note");
-		notes.removeNotes(argv.title);
+	handler(argv) {
+		Notes.removeNote(argv.title);
+		//console.log(argv.title);
 	},
 });
 
 yargs.command({
 	command: "list",
-	describe: "This will describe the Note",
-	handler: function () {
-		console.log("This will describe Note");
+	describe: "List all items",
+	handler() {
+		Notes.listNotes();
 	},
 });
 
 yargs.command({
 	command: "read",
-	describe: "To read the Notes",
-	handler: function () {
-		console.log("Reading note");
+	describe: "Read notes",
+	builder: {
+		title: {
+			describe: "Read title",
+			demandOption: true,
+			type: "string",
+		},
+	},
+	handler(argv) {
+		Notes.readNotes(argv.title);
+		//console.log("Reading all the item");
 	},
 });
+
+//console.log(Notes.getNotes());
 
 yargs.parse();
